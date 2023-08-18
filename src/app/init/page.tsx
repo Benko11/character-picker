@@ -32,9 +32,7 @@ export default async function Init() {
 
     await charactersCollection.deleteMany({});
 
-    characters.map(
-      async (character) => await charactersCollection.insertOne(character)
-    );
+    charactersCollection.insertMany(characters);
 
     console.log("success!");
   }

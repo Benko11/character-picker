@@ -4,7 +4,6 @@ import clientPromise from "@/db";
 import { Character } from "./init/page";
 
 export async function getCharacters() {
-  "use server";
   const client = await clientPromise;
   const database = client.db("characterPicker");
   const charactersCollection = database.collection<Character>("characters");
