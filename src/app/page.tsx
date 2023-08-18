@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { Character } from "./init/page";
 import { randomNumber } from "@/utils/randomNumber";
 import Head from "next/head";
+import Image from "next/image";
 
 const FREQUENCY = 50;
 const STOP_AFTER = 3500;
@@ -49,9 +50,12 @@ export default function Home() {
     <>
       <main>
         {characters.map((c) => (
-          <img
+          <Image
             src={`/images/regularshow/${c.characterId}.webp`}
-            className="hidden"
+            width={0}
+            height={0}
+            alt=""
+            loading="eager"
           />
         ))}
         <div className="flex flex-col w-48">
