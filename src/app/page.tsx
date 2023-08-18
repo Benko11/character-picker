@@ -48,6 +48,12 @@ export default function Home() {
   return (
     <>
       <main>
+        {characters.map((c) => (
+          <img
+            src={`/images/regularshow/${c.characterId}.webp`}
+            className="hidden"
+          />
+        ))}
         <div className="flex flex-col w-48">
           <button
             className="text-sm uppercase shadow-lg tracking-tighter bg-slate-200 text-slate-800 px-4 py-2 rounded-full m-2 mb-4 hover:-translate-y-[2px] focus-within:-translate-y-[2px] focus-within:bg-slate-300 outline-none transition-transform "
