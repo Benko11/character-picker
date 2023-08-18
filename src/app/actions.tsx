@@ -12,5 +12,5 @@ export async function getCharacters() {
   for await (const character of raw) {
     characters.push(character);
   }
-  return characters;
+  return JSON.stringify(characters);
 }

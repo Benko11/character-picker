@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { Character } from "./init/page";
 import { randomNumber } from "@/utils/randomNumber";
 import Head from "next/head";
-import Image from "next/image";
+import { ObjectId } from "mongodb";
 
 const FREQUENCY = 50;
 const STOP_AFTER = 3500;
@@ -19,7 +19,13 @@ export default function Home() {
   useEffect(() => {
     const fetch = async () => {
       const data = await getCharacters();
-      setCharacters(data);
+      const parsed = JSON.parse(data);
+
+      setCharacters(parsed);
+      parsed.map((c: Character) => {
+        const img: HTMLImageElement = new Image();
+        img.src = `/images/regularshow/${c.characterId}.webp`;
+      });
     };
     fetch();
   }, []);
@@ -38,7 +44,7 @@ export default function Home() {
         setPicked(n);
       }
     }, FREQUENCY);
-  }, [clicked]);
+  }, [clicked, characters.length]);
 
   function handleGenerate() {
     setClicked(true);
@@ -49,15 +55,6 @@ export default function Home() {
   return (
     <>
       <main>
-        {characters.map((c) => (
-          <Image
-            src={`/images/regularshow/${c.characterId}.webp`}
-            width={0}
-            height={0}
-            alt=""
-            loading="eager"
-          />
-        ))}
         <div className="flex flex-col w-48">
           <button
             className="text-sm uppercase shadow-lg tracking-tighter bg-slate-200 text-slate-800 px-4 py-2 rounded-full m-2 mb-4 hover:-translate-y-[2px] focus-within:-translate-y-[2px] focus-within:bg-slate-300 outline-none transition-transform "
